@@ -29,10 +29,12 @@ Instrucciones paso a paso para instalar el proyecto.
 ```bash
 # Clonar el repositorio
 git clone https://github.com/LizardXar/Proyecto-casa-de-cambios-ACME.git
+```
 
 ```bash
 # Navegar al directorio del proyecto
 cd Proyecto-casa-de-cambios-ACME
+```
 
 ```bash
 # (Opcional) Con Visual Studio Code
