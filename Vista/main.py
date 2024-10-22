@@ -1,7 +1,6 @@
 from .root import Root
 from .ventana_home import HomeView
 from .ventana_lista_monedas_autorizadas import ListViewActivo
-from .ventana_lista_monedas_inactivas import ListViewInactivo
 from .ventana_lista_monedas_todas import ListViewTodas
 
 class View:
@@ -12,7 +11,6 @@ class View:
 
         self._add_frame(HomeView, "home")
         self._add_frame(ListViewActivo, "listActive")
-        self._add_frame(ListViewInactivo, "listInactive")
         self._add_frame(ListViewTodas, "listAll")
 
     def _add_frame(self, Frame, name):

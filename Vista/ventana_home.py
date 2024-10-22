@@ -13,8 +13,6 @@ class HomeView(Frame):
         self.list_active_btn = Button(self, text="Listar monedas Activas")
         self.list_active_btn.grid(row=2, column=0, padx=10, pady=10)
         
-        self.list_inactive_btn = Button(self, text="Listar monedas Inactivas")
-        self.list_inactive_btn.grid(row=3, column=0, padx=10, pady=10)
         
         self.list_all_btn = Button(self, text="Listar todas las monedas")
-        self.list_all_btn.grid(row=4, column=0, padx=10, pady=10)
+        self.list_all_btn.grid(row=3, column=0, padx=10, pady=10)

@@ -16,6 +16,6 @@ class ListActiveController:
         self.view.stop_mainloop()
         
     def update_view(self):
-        lista_DTO = self.model.gestor_monedas.desplegar_monedas()
+        lista_DTO = self.model.gestor_monedas.desplegar_monedas_activas()
         print("pide listar activas")
-        self.frame.listar_monedas(lista_DTO)
+        self.frame.listar_monedas_autorizadas(lista_DTO)

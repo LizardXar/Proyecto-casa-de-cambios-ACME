@@ -18,8 +18,9 @@ class ListViewActivo(Frame):
         self.return_btn.grid(row=4, column=0, padx=10, pady=10, sticky="w")
  
         
-    def listar_monedas(self, lista_DTO): 
+    def listar_monedas_autorizadas(self, lista_DTO): 
         self.listaMonedas.delete(0, END)
-        for i, moneda in lista_DTO.items():
-            if moneda.estado == 'Activo':
-                self.listaMonedas.insert(i, f"{moneda.codigo} - {moneda.tasa_cambio}")
+        for i, moneda in lista_DTO[1].items():
+            self.listaMonedas.insert(i, f"{moneda['codigo']} - {moneda['nombre']} - {moneda['tipo']}")
+
+

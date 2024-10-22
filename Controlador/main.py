@@ -1,6 +1,5 @@
 from .home_menu import HomeController
 from .list_monedas_activas import ListActiveController
-from .list_monedas_inactivas import ListInactiveController
 from .list_monedas_todas import ListAllController
 
 class Controller:
@@ -10,14 +9,10 @@ class Controller:
         self.model = model
         self.home_controller = HomeController(model, view)
         self.list_active_controller = ListActiveController(model, view)
-        self.list_inactive_controller = ListInactiveController(model, view)
         self.list_all_controller = ListAllController(model, view)
 
         self.model.gestor_monedas.add_event_listener(
             "lista_monedas_activas", self.monedas_activas_list_listener)
-        
-        self.model.gestor_monedas.add_event_listener(
-            "lista_monedas_inactivas", self.monedas_inactivas_list_listener)
         
         self.model.gestor_monedas.add_event_listener(
             "lista_monedas", self.monedas_todas_list_listener)
@@ -26,9 +21,6 @@ class Controller:
         self.list_active_controller.update_view()
         self.view.switch("listActive")
     
-    def monedas_inactivas_list_listener(self, data):
-        self.list_inactive_controller.update_view()
-        self.view.switch("listInactive")
     
     def monedas_todas_list_listener(self, data):
         self.list_all_controller.update_view()

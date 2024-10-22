@@ -1,11 +1,13 @@
 from .event_handler import ObservableModel
 from .monedas_DAO import Monedas_DAO
+from .conectorBD import ConectorBD
 
 class Gestor_Monedas(ObservableModel):
 
     def __init__(self):
         super().__init__()
-        self.monedas_DAO = Monedas_DAO()
+        self.conectorBD = ConectorBD(hostdb="localhost", userdb="root", passwordb="", basedatosdb="casa_acme")
+        self.monedas_DAO = Monedas_DAO(self.conectorBD)
 
     def recuperar_monedas(self):
         self.trigger_event("lista_monedas")
@@ -13,10 +15,11 @@ class Gestor_Monedas(ObservableModel):
     def recuperar_monedas_activas(self):
         self.trigger_event("lista_monedas_activas")
     
-    def recuperar_monedas_inactivas(self):
-        self.trigger_event("lista_monedas_inactivas")
-    
     def desplegar_monedas(self):
-        lista_DTO = self.monedas_DAO.leer_monedas()
+        lista_DTO = self.monedas_DAO.recuperar_listaMonedas()
+        return lista_DTO
+    
+    def desplegar_monedas_activas(self):
+        lista_DTO = self.monedas_DAO.recuperar_listaMonedas_activas()
         return lista_DTO
     
