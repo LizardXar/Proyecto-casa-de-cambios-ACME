@@ -14,7 +14,6 @@ El proyecto consiste en el desarrollo de una aplicación de escritorio para faci
 ## Características
 
 - Listado de monedas activas
-- Listado de monedas inactivas
 - Listado de todas las monedas
   
 
@@ -31,8 +30,10 @@ Instrucciones paso a paso para instalar el proyecto.
 # Clonar el repositorio
 git clone https://github.com/LizardXar/Proyecto-casa-de-cambios-ACME.git
 
+```bash
 # Navegar al directorio del proyecto
 cd Proyecto-casa-de-cambios-ACME
 
+```bash
 # (Opcional) Con Visual Studio Code
 code .
