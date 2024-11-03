@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct  8 10:20:31 2024
+
+@author: Carlos Luco Montofré
+"""
+
 class Monedas_DAO:
 
     def __init__(self, conectorBD):
