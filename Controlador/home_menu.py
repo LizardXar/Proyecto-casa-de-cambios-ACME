@@ -9,9 +9,14 @@ class HomeController:
     def _bind(self):
         self.frame.list_active_btn.config(command=self.lists_active)
         self.frame.list_all_btn.config(command=self.lists_all)
+        self.frame.list_all_cajas_btn.config(command=self.lists_cajas)
 
     def lists_active(self):
         self.model.gestor_monedas.recuperar_monedas_activas()
 
     def lists_all(self):
         self.model.gestor_monedas.recuperar_monedas()
+    
+    def lists_cajas(self):
+        self.model.gestor_caja.recuperar_cajas()
+    

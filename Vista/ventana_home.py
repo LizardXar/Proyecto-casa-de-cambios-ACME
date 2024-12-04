@@ -16,3 +16,6 @@ class HomeView(Frame):
         
         self.list_all_btn = Button(self, text="Listar todas las monedas")
         self.list_all_btn.grid(row=3, column=0, padx=10, pady=10)
+
+        self.list_all_cajas_btn = Button(self, text="Listar todas las cajas")
+        self.list_all_cajas_btn.grid(row=4, column=0, padx=10, pady=10)

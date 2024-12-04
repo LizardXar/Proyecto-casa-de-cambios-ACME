@@ -2,6 +2,8 @@ from .root import Root
 from .ventana_home import HomeView
 from .ventana_lista_monedas_autorizadas import ListViewActivo
 from .ventana_lista_monedas_todas import ListViewTodas
+from .ventana_cajas import ListViewCajas
+from .ventana_caja import ListViewSaldoCaja
 
 class View:
     
@@ -12,6 +14,8 @@ class View:
         self._add_frame(HomeView, "home")
         self._add_frame(ListViewActivo, "listActive")
         self._add_frame(ListViewTodas, "listAll")
+        self._add_frame(ListViewCajas, "listAllCajas")
+        self._add_frame(ListViewSaldoCaja, "listAllSaldos")
 
     def _add_frame(self, Frame, name):
         self.frames[name] = Frame(self.root)

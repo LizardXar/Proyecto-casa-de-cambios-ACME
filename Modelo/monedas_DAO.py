@@ -16,7 +16,7 @@ class Monedas_DAO:
         if estado == 66:
             return estado, None
         
-        sql = "SELECT cod_moneda, nom_moneda, tipo_cambio FROM monedas order by cod_moneda"
+        sql = "SELECT cod_moneda, nom_moneda, tipo_cambio FROM moneda order by cod_moneda"
         estado, datos = self.conectorBD.ejecutarSelectAll(sql)
 
         listaMonedas_DTO = {}
@@ -36,14 +36,14 @@ class Monedas_DAO:
         if estado == 66:
             return estado, None
         
-        sql = "SELECT cod_moneda, nom_moneda, tipo_cambio FROM monedas where estado = 1 order by cod_moneda"
+        sql = "SELECT cod_moneda, nom_moneda, tipo_cambio, estado FROM moneda where estado = 1 order by cod_moneda"
         estado, datos = self.conectorBD.ejecutarSelectAll(sql)
 
         listaMonedas_DTO = {}
 
         if estado == 0:
             for i in range(0, len(datos)):
-                registro = {"codigo": datos[i][0], "nombre": datos[i][1], "tipo": datos[i][2]}
+                registro = {"codigo": datos[i][0], "nombre": datos[i][1], "tipo": datos[i][2], "estado": datos[i][3]}
                 listaMonedas_DTO[i] = registro
 
         self.conectorBD.desactivarConexion()
