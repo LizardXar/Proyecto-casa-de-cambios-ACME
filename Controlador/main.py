@@ -5,7 +5,7 @@ from .list_monedas_todas import ListAllController
 from .list_cajas import ListCajaController
 from .list_saldos import ListSaldoController
 from .login_usuario import LoginController
-from .list_ganancias import ListGananciasController
+from .list_monedas_trazadas import ListMonedasTrazadasController # IMPORTACION DE LISTA MONEDAS TRAZADAS
 
 class Controller:
 
@@ -19,7 +19,7 @@ class Controller:
         self.list_cajas = ListCajaController(model, view)
         self.list_saldos = ListSaldoController(model, view)
         self.login_usuario = LoginController(model, view)
-        self.list_ganancias = ListGananciasController(model, view)
+        self.list_monedas_trazadas = ListMonedasTrazadasController(model, view)  # NUEVO CONTROLADOR
 
         self.model.gestor_usuarios.add_event_listener(
             "ingreso_ejecutivo", self.ingreso_ejecutivo_listener)
@@ -39,11 +39,11 @@ class Controller:
         self.model.gestor_caja.add_event_listener(
             "lista_saldos", self.saldos_list_listener)
         
+        self.model.gestor_monedas.add_event_listener(
+            "lista_monedas_trazadas", self.monedas_trazadas_listener)  # AQUI ESTA EL NUEVO EVENTO
+
         self.model.gestor_usuarios.add_event_listener(
             "salida_sistema", self.autentificacion_signout_listener)
-        
-        self.model.gestor_transaccion.add_event_listener(
-            "lista_ganancias", self.ganancias_list_listener)    #DIEGO G
     
     def ingreso_ejecutivo_listener(self, data):
         self.home_menu_ejecutivo.update_view()
@@ -69,12 +69,12 @@ class Controller:
         self.list_saldos.update_view()
         self.view.switch("listAllSaldos")
 
+    def monedas_trazadas_listener(self, data):
+        self.list_monedas_trazadas.update_view()
+        self.view.switch("listMonedasTrazadas")  # METODO PARA MANEJAR MONEDAS TRAZADASs
+
     def autentificacion_signout_listener(self, data):
         self.view.switch("login")
-
-    def ganancias_list_listener(self, data):
-        self.list_ganancias.update_view()
-        self.view.switch("listGanancias")
 
     def start(self):
         self.view.switch("login")

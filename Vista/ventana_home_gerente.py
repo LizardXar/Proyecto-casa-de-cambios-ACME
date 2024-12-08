@@ -22,3 +22,5 @@ class HomeViewGerente(Frame):
 
         self.signout_btn = Button(self, text="Salir")
         self.signout_btn.grid(row=4, column=0, padx=10, pady=10)
+
+

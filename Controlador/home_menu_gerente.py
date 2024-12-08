@@ -12,10 +12,10 @@ class HomeGerenteController:
         self.frame.signout_btn.config(command=self.logout)
 
     def list_monedas_trazadas(self):
-        pass
+        self.model.gestor_transaccion.recuperar_moneda_mas_vendida()
 
     def list_ganancias(self):
-        self.model.gestor_transaccion.recuperar_ganancias()
+        pass
 
     def logout(self):
         self.model.gestor_usuarios.logout()
