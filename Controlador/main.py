@@ -39,7 +39,7 @@ class Controller:
         self.model.gestor_caja.add_event_listener(
             "lista_saldos", self.saldos_list_listener)
         
-        self.model.gestor_monedas.add_event_listener(
+        self.model.gestor_transaccion.add_event_listener(
             "lista_monedas_trazadas", self.monedas_trazadas_listener)  # AQUI ESTA EL NUEVO EVENTO
 
         self.model.gestor_usuarios.add_event_listener(

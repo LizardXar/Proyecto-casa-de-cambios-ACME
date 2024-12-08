@@ -20,7 +20,7 @@ class ListViewMonedasTrazadas(Frame):
 
     def listar_monedas(self, lista_monedas):
         self.listaMonedasTrazadas.delete(0, END)
-        for i, moneda in enumerate(lista_monedas, start=1):
-            self.listaMonedasTrazadas.insert(END, f"{i} - {moneda['nombre']} - {moneda['cantidad']}")
+        for i, moneda in lista_monedas[1].items():
+            self.listaMonedasTrazadas.insert(END, f" {moneda['moneda']} - {moneda['trazada']}")    
 
    

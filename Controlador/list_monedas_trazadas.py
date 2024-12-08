@@ -16,6 +16,6 @@ class ListMonedasTrazadasController:
         self.view.stop_mainloop()
 
     def update_view(self):
-        lista_monedas = self.model.gestor_monedas.obtener_monedas_trazadas()
+        lista_monedas = self.model.gestor_transaccion.desplegar_moneda_mas_vendida()
         self.frame.listar_monedas(lista_monedas)
         print("Vista actualizada con lista de monedas trazadas.")
