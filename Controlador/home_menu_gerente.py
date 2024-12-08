@@ -15,7 +15,7 @@ class HomeGerenteController:
         pass
 
     def list_ganancias(self):
-        pass
+        self.model.gestor_transaccion.recuperar_ganancias()
 
     def logout(self):
         self.model.gestor_usuarios.logout()

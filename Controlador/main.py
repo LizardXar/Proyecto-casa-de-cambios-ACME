@@ -5,6 +5,7 @@ from .list_monedas_todas import ListAllController
 from .list_cajas import ListCajaController
 from .list_saldos import ListSaldoController
 from .login_usuario import LoginController
+from .list_ganancias import ListGananciasController
 
 class Controller:
 
@@ -12,12 +13,13 @@ class Controller:
         self.view = view
         self.model = model
         self.home_menu_ejecutivo = HomeEjecutivoController(model, view)
-        self.home_menu_gerente = HomeGerenteController(model, view)  # ← Corregido aquí
+        self.home_menu_gerente = HomeGerenteController(model, view)
         self.list_active_controller = ListActiveController(model, view)
         self.list_all_controller = ListAllController(model, view)
         self.list_cajas = ListCajaController(model, view)
         self.list_saldos = ListSaldoController(model, view)
         self.login_usuario = LoginController(model, view)
+        self.list_ganancias = ListGananciasController(model, view)
 
         self.model.gestor_usuarios.add_event_listener(
             "ingreso_ejecutivo", self.ingreso_ejecutivo_listener)
@@ -39,6 +41,9 @@ class Controller:
         
         self.model.gestor_usuarios.add_event_listener(
             "salida_sistema", self.autentificacion_signout_listener)
+        
+        self.model.gestor_transaccion.add_event_listener(
+            "lista_ganancias", self.ganancias_list_listener)    #DIEGO G
     
     def ingreso_ejecutivo_listener(self, data):
         self.home_menu_ejecutivo.update_view()
@@ -66,6 +71,10 @@ class Controller:
 
     def autentificacion_signout_listener(self, data):
         self.view.switch("login")
+
+    def ganancias_list_listener(self, data):
+        self.list_ganancias.update_view()
+        self.view.switch("listGanancias")
 
     def start(self):
         self.view.switch("login")
