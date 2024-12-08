@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 03-11-2024 a las 22:50:10
+-- Tiempo de generación: 08-12-2024 a las 17:10:32
 -- Versión del servidor: 8.3.0
 -- Versión de PHP: 8.2.18
 
@@ -36,7 +36,15 @@ CREATE TABLE IF NOT EXISTS `caja` (
   `estado` int DEFAULT NULL,
   PRIMARY KEY (`cod_caja`),
   KEY `fk_caja_empleado1_idx` (`empleado_cod_empleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `caja`
+--
+
+INSERT INTO `caja` (`cod_caja`, `empleado_cod_empleado`, `estado`) VALUES
+(1, 1, 1),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -54,11 +62,20 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `telefono` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `fecha_nac` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `correo` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `clave` varchar(200) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `clave` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `cod_tipo_empleado` int NOT NULL,
   PRIMARY KEY (`cod_empleado`),
   KEY `fk_empleado_tipo_empleado1_idx` (`cod_tipo_empleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`cod_empleado`, `nombre`, `apellido_paterno`, `apellido_materno`, `sexo`, `telefono`, `fecha_nac`, `correo`, `clave`, `cod_tipo_empleado`) VALUES
+(1, 'Juan', 'Perez', 'Pereira', 'Hombre', '+56912345678', '29/12/1999', 'jp.pereira@gmail.com', '1234', 4),
+(2, 'Jose', 'Rojas', 'Araos', 'Hombre', '+56914253647', '29/12/1997', 'jr.araos@gmail.com', '1234', 2),
+(3, 'Ramiro', 'Hernandes', 'Salvo', 'Hombre', '+56988884444', '10/09/2002', 'rh.salvo@gmail.com', '1234', 1);
 
 -- --------------------------------------------------------
 
@@ -83,13 +100,13 @@ INSERT INTO `moneda` (`cod_moneda`, `nom_moneda`, `tipo_cambio`, `estado`) VALUE
 (1, 'USD', 870.00, '1'),
 (2, 'EUR', 950.00, '1'),
 (3, 'GBP', 1100.00, '1'),
-(4, 'JPY', 8.00, '1'),
+(4, 'JPY', 8.00, '2'),
 (5, 'AUD', 650.00, '1'),
 (6, 'CAD', 660.00, '1'),
-(7, 'CHF', 940.00, '1'),
+(7, 'CHF', 940.00, '2'),
 (8, 'CNY', 130.00, '1'),
-(9, 'MXN', 45.00, '1'),
-(10, 'BRL', 170.00, '1');
+(9, 'MXN', 45.00, '2'),
+(10, 'BRL', 170.00, '2');
 
 -- --------------------------------------------------------
 
@@ -107,6 +124,14 @@ CREATE TABLE IF NOT EXISTS `saldo_caja` (
   KEY `fk_caja_has_moneda_caja_idx` (`cod_caja`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `saldo_caja`
+--
+
+INSERT INTO `saldo_caja` (`cod_caja`, `cod_moneda`, `disponibilidad`) VALUES
+(1, 1, 200.00),
+(1, 2, 200.00);
+
 -- --------------------------------------------------------
 
 --
@@ -118,7 +143,17 @@ CREATE TABLE IF NOT EXISTS `tipo_empleado` (
   `cod_tipo_empleado` int NOT NULL AUTO_INCREMENT,
   `rol` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`cod_tipo_empleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_empleado`
+--
+
+INSERT INTO `tipo_empleado` (`cod_tipo_empleado`, `rol`) VALUES
+(1, 'Gerente'),
+(2, 'Ejecutivo'),
+(3, 'Administrador'),
+(4, 'Cajero');
 
 -- --------------------------------------------------------
 

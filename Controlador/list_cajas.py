@@ -8,13 +8,14 @@ class ListCajaController:
 
     def _bind(self):
         self.frame.return_btn.config(command=self.retorno)
-        self.frame.ver_saldo_btn.config(command=self.ver)
+        self.frame.ver_saldo_btn.config(command=self.ver_saldo)
 
     def retorno(self):
-        self.view.switch("home")
+        self.view.switch("homeEjecutivo")
     
-    def ver(self):
+    def ver_saldo(self):
         cod_caja = self.frame.obtener_cod_caja_seleccionado()
+        lista_saldos = self.model.gestor_caja.desplegar_saldo(cod_caja)
         if cod_caja:
             print(f"Caja seleccionada: {cod_caja}")
             lista_saldos = self.model.gestor_caja.desplegar_saldo(cod_caja)

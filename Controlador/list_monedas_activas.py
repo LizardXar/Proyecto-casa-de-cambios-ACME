@@ -10,7 +10,7 @@ class ListActiveController:
         self.frame.return_btn.config(command=self.retorno)
 
     def retorno(self):
-        self.view.switch("home")
+        self.view.switch("homeEjecutivo")
            
     def close(self):
         self.view.stop_mainloop()
