@@ -16,7 +16,7 @@ class ListViewActivo(Frame):
         
         self.return_btn = Button(self, text="Retornar menu")
         self.return_btn.grid(row=4, column=0, padx=10, pady=10, sticky="w")
- 
+
         
     def listar_monedas_autorizadas(self, lista_DTO): 
         self.listaMonedas.delete(0, END)

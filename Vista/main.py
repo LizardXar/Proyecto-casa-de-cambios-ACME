@@ -6,6 +6,7 @@ from .ventana_lista_cajas import ListViewCajas
 from .ventana_lista_saldo_caja import ListViewSaldoCaja
 from .ventana_login import LoginView
 from .ventana_home_gerente import HomeViewGerente
+from .ventana_lista_ganancias import ListViewGanancias
 
 class View:
     
@@ -19,6 +20,7 @@ class View:
         self._add_frame(ListViewTodas, "listAll")
         self._add_frame(ListViewCajas, "listAllCajas")
         self._add_frame(ListViewSaldoCaja, "listAllSaldos")
+        self._add_frame(ListViewGanancias, "listGanancias")
         self._add_frame(LoginView, "login")
 
     def _add_frame(self, Frame, name):
@@ -33,4 +35,4 @@ class View:
         self.root.mainloop()
         
     def stop_mainloop(self):
-         self.root.destroy()
+        self.root.destroy()
