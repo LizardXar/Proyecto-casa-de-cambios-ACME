@@ -164,14 +164,11 @@ INSERT INTO `tipo_empleado` (`cod_tipo_empleado`, `rol`) VALUES
 DROP TABLE IF EXISTS `transaccion`;
 CREATE TABLE IF NOT EXISTS `transaccion` (
   `cod_transaccion` int NOT NULL AUTO_INCREMENT,
-  `cod_empleado` int NOT NULL,
   `cod_caja` int NOT NULL,
   `cod_moneda` int NOT NULL,
   `monto_transferido` decimal(15,2) DEFAULT NULL,
-  `monto_recibido` decimal(15,2) DEFAULT NULL,
   `fecha_transaccion` datetime DEFAULT NULL,
   PRIMARY KEY (`cod_transaccion`),
-  KEY `fk_transaccion_empleado1_idx` (`cod_empleado`),
   KEY `fk_transaccion_caja1_idx` (`cod_caja`),
   KEY `fk_transaccion_moneda1_idx` (`cod_moneda`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
@@ -204,7 +201,6 @@ ALTER TABLE `saldo_caja`
 --
 ALTER TABLE `transaccion`
   ADD CONSTRAINT `fk_transaccion_caja1` FOREIGN KEY (`cod_caja`) REFERENCES `caja` (`cod_caja`),
-  ADD CONSTRAINT `fk_transaccion_empleado1` FOREIGN KEY (`cod_empleado`) REFERENCES `empleado` (`cod_empleado`),
   ADD CONSTRAINT `fk_transaccion_moneda1` FOREIGN KEY (`cod_moneda`) REFERENCES `moneda` (`cod_moneda`);
 COMMIT;
 
