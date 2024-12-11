@@ -1,12 +1,12 @@
-from Modelo.main import Model
-from Vista.main import View
-from Controlador.main import Controller
+from Modelo.main import Modelo
+from Vista.main import Vista
+from Controlador.main import Controlador
 
 def main():
-    model = Model()
-    view = View()
-    controller = Controller(model, view)
-    controller.start()
+    modelo = Modelo()
+    vista = Vista()
+    controlador = Controlador(modelo, vista)
+    controlador.start()
 
 if __name__ == "__main__":
     main()

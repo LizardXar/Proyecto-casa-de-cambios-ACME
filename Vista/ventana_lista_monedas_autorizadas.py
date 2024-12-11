@@ -1,6 +1,7 @@
-from tkinter import Frame, Label, Button, Listbox, END
+from tkinter import Frame, Label, Button
+from tkinter import ttk
 
-class ListViewActivo(Frame):
+class VistaListaActivos(Frame):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -11,16 +12,23 @@ class ListViewActivo(Frame):
         self.header = Label(self, text="Lista de Monedas Autorizadas")
         self.header.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
-        self.listaMonedas = Listbox(self)
-        self.listaMonedas.grid(row=1, column=0, padx=(0, 30), sticky="e")
-        
+        self.treeview = ttk.Treeview(self, columns=("Código", "Nombre", "Tipo"), show="headings", selectmode="browse")
+        self.treeview.grid(row=1, column=0, padx=(0, 30), sticky="e")
+
+        self.treeview.heading("Código", text="Código")
+        self.treeview.heading("Nombre", text="Nombre")
+        self.treeview.heading("Tipo", text="Tipo de cambio")
+
+        self.treeview.column("Código", width=50)
+        self.treeview.column("Nombre", width=50)
+        self.treeview.column("Tipo", width=100)
+
         self.return_btn = Button(self, text="Retornar menu")
         self.return_btn.grid(row=4, column=0, padx=10, pady=10, sticky="w")
 
-        
     def listar_monedas_autorizadas(self, lista_DTO): 
-        self.listaMonedas.delete(0, END)
+        for row in self.treeview.get_children():
+            self.treeview.delete(row)
+
         for i, moneda in lista_DTO[1].items():
-            self.listaMonedas.insert(i, f"{moneda['codigo']} - {moneda['nombre']} - {moneda['tipo']}")
-
-
+            self.treeview.insert("", "end", values=(moneda['codigo'], moneda['nombre'], moneda['tipo']))

@@ -1,6 +1,6 @@
 from tkinter import Frame, Label, Button
 
-class HomeViewEjecutivo(Frame):
+class VistaInicioEjecutivo(Frame):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

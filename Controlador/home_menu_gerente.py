@@ -1,29 +1,35 @@
-class HomeGerenteController:
+class ControladorInicioGerente:
 
-    def __init__(self, model, view):
-        self.model = model
-        self.view = view
-        self.frame = self.view.frames["homeGerente"]
+    # Inicializa la clase con el modelo y la vista proporcionados
+    def __init__(self, modelo, vista):
+        self.modelo = modelo
+        self.vista = vista
+        self.frame = self.vista.frames["inicioGerente"]
         self._bind()
     
+    # Configura los eventos de la interfaz de usuario
     def _bind(self):
-        self.frame.list_monedas_trazadas_btn.config(command=self.list_monedas_trazadas)
-        self.frame.list_ganancias_btn.config(command=self.list_ganancias)
-        self.frame.signout_btn.config(command=self.logout)
+        self.frame.list_monedas_trazadas_btn.config(command=self.listar_monedas_trazadas)
+        self.frame.list_ganancias_btn.config(command=self.listar_ganancias)
+        self.frame.signout_btn.config(command=self.cerrar_sesion)
 
-    def list_monedas_trazadas(self):
-        pass
+    # Maneja el evento de listar las monedas trazadas
+    def listar_monedas_trazadas(self):
+        self.modelo.gestor_transaccion.recuperar_moneda_mas_vendida()
 
-    def list_ganancias(self):
-        self.model.gestor_transaccion.recuperar_ganancias()
+    # Maneja el evento de listar las ganancias
+    def listar_ganancias(self):
+        self.modelo.gestor_transaccion.recuperar_ganancias()
 
-    def logout(self):
-        self.model.gestor_usuarios.logout()
+    # Maneja el evento de cerrar sesión
+    def cerrar_sesion(self):
+        self.modelo.gestor_usuarios.cerrar_sesion()
 
+    # Actualiza la vista con el saludo al usuario actual
     def update_view(self):
-        current_user = self.model.gestor_usuarios.saludo_usuario()
+        current_user = self.modelo.gestor_usuarios.saludo_usuario()
         if current_user:
             nombre = current_user
         else:
             nombre = 'Set-up sistema'
-        self.frame.greeting.config(text=f"Bienvenido, {nombre}!")
+        self.frame.greeting.config(text=f"¡Bienvenido, {nombre}!")

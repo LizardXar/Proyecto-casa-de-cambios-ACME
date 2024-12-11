@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 08-12-2024 a las 17:10:32
+-- Tiempo de generación: 11-12-2024 a las 16:41:22
 -- Versión del servidor: 8.3.0
 -- Versión de PHP: 8.2.18
 
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `caja` (
 --
 
 INSERT INTO `caja` (`cod_caja`, `empleado_cod_empleado`, `estado`) VALUES
-(1, 1, 1),
-(2, 2, 1);
+(1, 4, 1),
+(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -55,27 +55,28 @@ INSERT INTO `caja` (`cod_caja`, `empleado_cod_empleado`, `estado`) VALUES
 DROP TABLE IF EXISTS `empleado`;
 CREATE TABLE IF NOT EXISTS `empleado` (
   `cod_empleado` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `apellido_paterno` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `apellido_materno` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `sexo` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `telefono` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `fecha_nac` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `correo` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `clave` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `nombre` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `apellido_paterno` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `apellido_materno` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `sexo` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `telefono` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `fecha_nac` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `correo` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `clave` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `cod_tipo_empleado` int NOT NULL,
   PRIMARY KEY (`cod_empleado`),
   KEY `fk_empleado_tipo_empleado1_idx` (`cod_tipo_empleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
 INSERT INTO `empleado` (`cod_empleado`, `nombre`, `apellido_paterno`, `apellido_materno`, `sexo`, `telefono`, `fecha_nac`, `correo`, `clave`, `cod_tipo_empleado`) VALUES
-(1, 'Juan', 'Perez', 'Pereira', 'Hombre', '+56912345678', '29/12/1999', 'jp.pereira@gmail.com', '1234', 4),
-(2, 'Jose', 'Rojas', 'Araos', 'Hombre', '+56914253647', '29/12/1997', 'jr.araos@gmail.com', '1234', 2),
-(3, 'Ramiro', 'Hernandes', 'Salvo', 'Hombre', '+56988884444', '10/09/2002', 'rh.salvo@gmail.com', '1234', 1);
+(1, 'Juan', 'Perez', 'Pereira', 'Hombre', '+56912345678', '29/12/1999', 'cajero1', '1234', 4),
+(2, 'Jose', 'Rojas', 'Araos', 'Hombre', '+56914253647', '29/12/1997', 'gerente', '1234', 2),
+(3, 'Ramiro', 'Hernandes', 'Salvo', 'Hombre', '+56988884444', '10/09/2002', 'ejecutivo', '1234', 1),
+(4, 'Pedro', 'Paz', 'Conejero', 'Hombre', '+56912349876', '10/10/1995', 'cajero2', '1234', 4);
 
 -- --------------------------------------------------------
 
@@ -86,9 +87,9 @@ INSERT INTO `empleado` (`cod_empleado`, `nombre`, `apellido_paterno`, `apellido_
 DROP TABLE IF EXISTS `moneda`;
 CREATE TABLE IF NOT EXISTS `moneda` (
   `cod_moneda` int NOT NULL AUTO_INCREMENT,
-  `nom_moneda` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `nom_moneda` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `tipo_cambio` decimal(10,2) DEFAULT NULL,
-  `estado` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `estado` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`cod_moneda`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -130,7 +131,11 @@ CREATE TABLE IF NOT EXISTS `saldo_caja` (
 
 INSERT INTO `saldo_caja` (`cod_caja`, `cod_moneda`, `disponibilidad`) VALUES
 (1, 1, 200.00),
-(1, 2, 200.00);
+(1, 2, 200.00),
+(1, 5, 250.00),
+(1, 10, 400.00),
+(2, 1, 100.00),
+(2, 3, 550.00);
 
 -- --------------------------------------------------------
 
@@ -141,7 +146,7 @@ INSERT INTO `saldo_caja` (`cod_caja`, `cod_moneda`, `disponibilidad`) VALUES
 DROP TABLE IF EXISTS `tipo_empleado`;
 CREATE TABLE IF NOT EXISTS `tipo_empleado` (
   `cod_tipo_empleado` int NOT NULL AUTO_INCREMENT,
-  `rol` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `rol` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`cod_tipo_empleado`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -171,7 +176,17 @@ CREATE TABLE IF NOT EXISTS `transaccion` (
   PRIMARY KEY (`cod_transaccion`),
   KEY `fk_transaccion_caja1_idx` (`cod_caja`),
   KEY `fk_transaccion_moneda1_idx` (`cod_moneda`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `transaccion`
+--
+
+INSERT INTO `transaccion` (`cod_transaccion`, `cod_caja`, `cod_moneda`, `monto_transferido`, `fecha_transaccion`) VALUES
+(1, 1, 1, 20.00, '2024-12-11 13:01:55'),
+(2, 1, 5, 30.00, '2024-12-12 13:01:55'),
+(3, 1, 1, 30.00, '2024-12-12 13:25:34'),
+(4, 1, 1, 50.00, '2024-12-31 13:02:34');
 
 --
 -- Restricciones para tablas volcadas

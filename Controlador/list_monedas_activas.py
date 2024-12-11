@@ -1,21 +1,26 @@
-class ListActiveController:
+class ControladorListaActivos:
     
-    def __init__(self, model, view):
-        self.model = model
-        self.view = view
-        self.frame = self.view.frames["listActive"]
+    # Inicializa la clase con el modelo y la vista proporcionados
+    def __init__(self, modelo, vista):
+        self.modelo = modelo
+        self.vista = vista
+        self.frame = self.vista.frames["listaActivos"]
         self._bind()
 
+    # Configura los eventos de la interfaz de usuario
     def _bind(self):
         self.frame.return_btn.config(command=self.retorno)
 
+    # Maneja el evento de retorno
     def retorno(self):
-        self.view.switch("homeEjecutivo")
-           
+        self.vista.switch("inicioEjecutivo")
+    
+    # Finaliza la aplicación
     def close(self):
-        self.view.stop_mainloop()
-        
+        self.vista.stop_mainloop()
+    
+    # Actualiza la vista con la lista de activos
     def update_view(self):
-        lista_DTO = self.model.gestor_monedas.desplegar_monedas_activas()
-        print("pide listar activas")
-        self.frame.listar_monedas_autorizadas(lista_DTO)
+        lista_dto = self.modelo.gestor_monedas.desplegar_monedas_activas()
+        print("pide listar activos")
+        self.frame.listar_monedas_autorizadas(lista_dto)

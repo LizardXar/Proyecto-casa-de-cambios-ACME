@@ -1,18 +1,22 @@
-class LoginController:
+class ControladorLogin:
     
-    def __init__(self, model, view):
-        self.model = model
-        self.view = view
-        self.frame = self.view.frames["login"]
+    # Inicializa la clase con el modelo y la vista proporcionados
+    def __init__(self, modelo, vista):
+        self.modelo = modelo
+        self.vista = vista
+        self.frame = self.vista.frames["login"]
         self._bind()
 
+    # Configura los eventos de la interfaz de usuario
     def _bind(self):
-        self.frame.login_btn.config(command=self.log_in)
-        self.frame.close_btn.config(command=self.close)
+        self.frame.login_btn.config(command=self.iniciar_sesion)
+        self.frame.close_btn.config(command=self.cerrar)
 
-    def log_in(self):
-        datos_DTO = self.frame.data_signin()
-        self.model.gestor_usuarios.login(datos_DTO)
+    # Maneja el evento de inicio de sesión
+    def iniciar_sesion(self):
+        datos_dto = self.frame.data_signin()
+        self.modelo.gestor_usuarios.login(datos_dto)
            
-    def close(self):
-        self.view.stop_mainloop()
+    # Finaliza la aplicación
+    def cerrar(self):
+        self.vista.stop_mainloop()
