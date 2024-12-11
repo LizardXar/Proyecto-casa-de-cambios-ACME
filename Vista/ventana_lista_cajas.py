@@ -1,4 +1,5 @@
-from tkinter import Frame, Label, Button, Listbox, END
+from tkinter import Frame, Label, Button
+from tkinter import ttk
 
 class ListViewCajas(Frame):
     
@@ -11,8 +12,16 @@ class ListViewCajas(Frame):
         self.header = Label(self, text="Lista de Cajas")
         self.header.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
-        self.listaCajas = Listbox(self)
-        self.listaCajas.grid(row=1, column=0, padx=(0, 30), sticky="e")
+        self.treeview = ttk.Treeview(self, columns=("Código", "Empleado", "Estado"), show="headings", selectmode="browse")
+        self.treeview.grid(row=1, column=0, padx=(0, 30), sticky="e")
+
+        self.treeview.heading("Código", text="Código")
+        self.treeview.heading("Empleado", text="Empleado")
+        self.treeview.heading("Estado", text="Estado")
+
+        self.treeview.column("Código", width=50)
+        self.treeview.column("Empleado", width=100)
+        self.treeview.column("Estado", width=50)
 
         self.ver_saldo_btn = Button(self, text="Ver saldo de caja")
         self.ver_saldo_btn.grid(row=1, column=1, padx=10, pady=10, sticky="w")
@@ -20,17 +29,17 @@ class ListViewCajas(Frame):
         self.return_btn = Button(self, text="Retornar menu")
         self.return_btn.grid(row=4, column=0, padx=10, pady=10, sticky="w")
  
-        
     def listar_cajas(self, lista_DTO): 
-        self.listaCajas.delete(0, END)
+        for row in self.treeview.get_children():
+            self.treeview.delete(row)
+
         for i, caja in lista_DTO[1].items():
-            self.listaCajas.insert(i, f"{caja['codigo']} - {caja['empleado']} - {caja['estado']}")
+            self.treeview.insert("", "end", values=(caja['codigo'], caja['empleado'], caja['estado']))
 
     def obtener_cod_caja_seleccionado(self):
-        # Obtener el item seleccionado en el Listbox
-        seleccion = self.listaCajas.curselection()
+        seleccion = self.treeview.selection()
         if seleccion:
-            item = self.listaCajas.get(seleccion[0])
-            cod_caja = item.split()[0]
+            item = self.treeview.item(seleccion[0])['values']
+            cod_caja = item[0]
             return cod_caja
         return None

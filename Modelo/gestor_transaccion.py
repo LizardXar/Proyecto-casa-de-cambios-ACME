@@ -14,3 +14,10 @@ class Gestor_Transaccion(ObservableModel):
     def desplegar_ganancias(self):
         lista_DTO = self.transaccion_DAO.recuperar_ganancias()
         return lista_DTO
+    
+    def recuperar_moneda_mas_vendida(self):
+        self.trigger_event("lista_monedas_trazadas")
+
+    def desplegar_moneda_mas_vendida(self):
+        lista_DTO = self.transaccion_DAO.obtener_moneda_mas_vendida()
+        return lista_DTO

@@ -6,6 +6,7 @@ from .list_cajas import ListCajaController
 from .list_saldos import ListSaldoController
 from .login_usuario import LoginController
 from .list_ganancias import ListGananciasController
+from .list_monedas_trazadas import ListMonedasTrazadasController
 
 class Controller:
 
@@ -20,6 +21,7 @@ class Controller:
         self.list_saldos = ListSaldoController(model, view)
         self.login_usuario = LoginController(model, view)
         self.list_ganancias = ListGananciasController(model, view)
+        self.list_monedas_trazadas = ListMonedasTrazadasController(model, view)
 
         self.model.gestor_usuarios.add_event_listener(
             "ingreso_ejecutivo", self.ingreso_ejecutivo_listener)
@@ -43,7 +45,10 @@ class Controller:
             "salida_sistema", self.autentificacion_signout_listener)
         
         self.model.gestor_transaccion.add_event_listener(
-            "lista_ganancias", self.ganancias_list_listener)    #DIEGO G
+            "lista_ganancias", self.ganancias_list_listener)
+        
+        self.model.gestor_transaccion.add_event_listener(
+        "lista_monedas_trazadas", self.monedas_trazadas_list_listener)
     
     def ingreso_ejecutivo_listener(self, data):
         self.home_menu_ejecutivo.update_view()
@@ -75,6 +80,10 @@ class Controller:
     def ganancias_list_listener(self, data):
         self.list_ganancias.update_view()
         self.view.switch("listGanancias")
+
+    def monedas_trazadas_list_listener(self, data):
+        self.list_monedas_trazadas.update_view()
+        self.view.switch("listMonedasTrazadas")
 
     def start(self):
         self.view.switch("login")
