@@ -50,6 +50,7 @@ class Transaccion_DAO:
 
         lista_monedas_vendidas_dto = {}
 
+
         if estado == 0:
             for i in range(len(datos)):
                 registro = {"moneda": datos[i][0], "trazada": datos[i][1]}

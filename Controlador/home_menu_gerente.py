@@ -17,6 +17,7 @@ class ControladorInicioGerente:
     def listar_monedas_trazadas(self):
         self.modelo.gestor_transaccion.recuperar_moneda_mas_vendida()
 
+
     # Maneja el evento de listar las ganancias
     def listar_ganancias(self):
         self.modelo.gestor_transaccion.recuperar_ganancias()

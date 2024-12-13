@@ -10,6 +10,7 @@ from .list_monedas_trazadas import ControladorListaMonedasTrazadas
 
 class Controlador:
 
+
     # Inicializa la clase con el modelo y la vista proporcionados, y configura los controladores específicos
     def __init__(self, modelo, vista):
         self.vista = vista
@@ -46,6 +47,7 @@ class Controlador:
         self.modelo.gestor_usuarios.add_event_listener(
             "salida_sistema", self.autenticacion_signout_listener)
         
+
         self.modelo.gestor_transaccion.add_event_listener(
             "lista_ganancias", self.lista_ganancias_listener)
         
@@ -95,6 +97,7 @@ class Controlador:
     def lista_monedas_trazadas_listener(self, data):
         self.list_monedas_trazadas.update_view()
         self.vista.switch("listaMonedasTrazadas")
+
 
     # Inicia la aplicación mostrando la vista de inicio de sesión
     def start(self):

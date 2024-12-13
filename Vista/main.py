@@ -9,6 +9,7 @@ from .ventana_home_gerente import VistaInicioGerente
 from .ventana_lista_ganancias import VistaListaGanancias
 from .ventana_monedas_trazadas import VistaListaMonedasTrazadas
 
+
 class Vista:
     
     def __init__(self):
@@ -24,7 +25,7 @@ class Vista:
         self._add_frame(VistaListaGanancias, "listaGanancias")
         self._add_frame(VistaLogin, "login")
         self._add_frame(VistaListaMonedasTrazadas, "listaMonedasTrazadas")
-
+        
     def _add_frame(self, Frame, name):
         self.frames[name] = Frame(self.root)
         self.frames[name].grid(row=0, column=0, sticky="nsew")

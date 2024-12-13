@@ -3,6 +3,7 @@ from tkinter import ttk  # Importar el módulo ttk para Treeview
 
 class VistaListaMonedasTrazadas(Frame):
 
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -11,6 +12,7 @@ class VistaListaMonedasTrazadas(Frame):
 
         self.header = Label(self, text="Lista de Monedas Más Trazadas")
         self.header.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+
 
         # Reemplazar Listbox con Treeview
         self.treeview = ttk.Treeview(self, columns=("Moneda", "Trazada"), show="headings")

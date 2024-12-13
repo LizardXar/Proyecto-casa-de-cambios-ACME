@@ -23,4 +23,5 @@ class ControladorListaGanancias:
     def update_view(self):
         lista_dto = self.modelo.gestor_transaccion.desplegar_ganancias()
         print("Listar Ganancias")
+
         self.frame.listar_ganancias(lista_dto)
