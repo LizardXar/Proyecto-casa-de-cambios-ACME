@@ -8,7 +8,7 @@ Created on Sat Aug  3 23:01:25 2024
 from tkinter import Frame, Label, Entry, Button
 
 
-class LoginView(Frame):
+class VistaLogin(Frame):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -42,4 +42,3 @@ class LoginView(Frame):
         data_dto = {"correo": username, "clave": pasword}
         self.password_input.delete(0, last=len(pasword))
         return data_dto
-                    

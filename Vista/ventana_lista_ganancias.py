@@ -1,7 +1,7 @@
 from tkinter import Frame, Label, Button
-from tkinter import ttk  # Import ttk module for Treeview
+from tkinter import ttk
 
-class ListViewGanancias(Frame):
+class VistaListaGanancias(Frame):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

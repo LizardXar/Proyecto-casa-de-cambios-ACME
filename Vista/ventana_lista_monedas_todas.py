@@ -1,7 +1,7 @@
 from tkinter import Frame, Label, Button
 from tkinter import ttk
 
-class ListViewTodas(Frame):
+class VistaListaTodas(Frame):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
