@@ -1,5 +1,5 @@
 from tkinter import Frame, Label, Button
-from tkinter import ttk  # Importar el módulo ttk para Treeview
+from tkinter import ttk
 
 class VistaListaMonedasTrazadas(Frame):
 

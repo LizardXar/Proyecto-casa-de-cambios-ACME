@@ -58,3 +58,16 @@ class Transaccion_DAO:
 
         self.conector_bd.desactivarConexion()
         return estado, lista_monedas_vendidas_dto
+    
+    def registrar_transaccion(self, cod_caja, cod_moneda, monto_clp):
+        estado = self.conector_bd.activarConexion()
+        if estado == 66:
+            return estado
+
+        sql = f"""
+            INSERT INTO transaccion (cod_caja, cod_moneda, monto_transferido, fecha_transaccion)
+            VALUES ({cod_caja}, {cod_moneda}, {monto_clp}, NOW())
+        """
+        estado = self.conector_bd.ejecutarInsert(sql)
+        self.conector_bd.desactivarConexion()
+        return estado

@@ -23,6 +23,9 @@ class VistaListaTodas(Frame):
         self.treeview.column("Nombre", width=50)
         self.treeview.column("Tipo", width=100)
 
+        self.tipo_cambio_btn = Button(self, text="Modificar tipo de cambio")
+        self.tipo_cambio_btn.grid(row=1, column=2, padx=10, pady=10, sticky="w")
+
         self.return_btn = Button(self, text="Retornar menu")
         self.return_btn.grid(row=4, column=0, padx=10, pady=10, sticky="w")
 
@@ -32,3 +35,11 @@ class VistaListaTodas(Frame):
         
         for i, moneda in lista_DTO[1].items():
             self.treeview.insert("", "end", values=(moneda['codigo'], moneda['nombre'], moneda['tipo']))
+
+    def obtener_cod_moneda_seleccionado(self):
+        seleccion = self.treeview.selection()
+        if seleccion:
+            item = self.treeview.item(seleccion[0])['values']
+            cod_moneda = item[0]
+            return cod_moneda
+        return None

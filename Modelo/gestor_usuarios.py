@@ -13,6 +13,7 @@ class Gestor_Usuarios(ModeloObservable):
         self.usuario_DAO = Usuarios_DAO(self.conectorBD)
         # Variable para almacenar el usuario actual
         self.current_user = None
+        self.current_user_id = None
 
     def login(self, datos_DTO):
         # Utiliza el método buscar_user de Usuarios_DAO para buscar el usuario
@@ -23,15 +24,26 @@ class Gestor_Usuarios(ModeloObservable):
             # Asigna el nombre del usuario actual
             self.current_user = lista_DTO["nombre"]
 
+            # Asigna el id del usuario actual
+            self.current_user_id = lista_DTO["cod_tipo_empleado"]
+
             # Dependiendo del tipo de empleado, dispara un evento diferente
             if lista_DTO["cod_tipo_empleado"] == 1:
                 self.trigger_event("ingreso_ejecutivo")
+
             elif lista_DTO["cod_tipo_empleado"] == 2:
                 self.trigger_event("ingreso_gerente")
+                
+            elif lista_DTO["cod_tipo_empleado"] == 4:
+                self.trigger_event("ingreso_cajero")
 
-    def saludo_usuario(self):
         # Retorna el nombre del usuario actual
+    def saludo_usuario(self):
         return self.current_user
+
+        # Retorna el id del usuario actual
+    def cod_empleado(self):
+        return self.current_user_id
     
     def cerrar_sesion(self):
         # Dispara un evento de salida del sistema

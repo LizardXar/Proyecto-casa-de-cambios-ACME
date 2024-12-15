@@ -6,7 +6,7 @@ class Root(Tk):
         super().__init__()
 
         start_width  = 600
-        min_width    = 500
+        min_width    = 400
         start_height = 400
         min_height   = 300
 

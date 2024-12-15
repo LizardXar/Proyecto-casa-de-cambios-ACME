@@ -23,5 +23,8 @@ class VistaInicioEjecutivo(Frame):
         self.list_all_cajas_btn = Button(self, text="Listar todas las cajas")
         self.list_all_cajas_btn.grid(row=4, column=0, padx=10, pady=10)
 
+        self.realizar_transaccion_btn = Button(self, text="Realizar Transacción")
+        self.realizar_transaccion_btn.grid(row=4, column=0, padx=10, pady=10)
+
         self.signout_btn = Button(self, text="Salir")
         self.signout_btn.grid(row=5, column=0, padx=10, pady=10)

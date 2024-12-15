@@ -34,7 +34,10 @@ class Caja_DAO:
                 SELECT m.nom_moneda, s.disponibilidad
                 FROM saldo_caja s
                 JOIN moneda m ON s.cod_moneda = m.cod_moneda
-                WHERE s.cod_caja = {codigo};
+                WHERE s.cod_caja = {codigo} 
+                AND m.cod_moneda NOT IN 
+                (SELECT cod_moneda FROM moneda WHERE nom_moneda = 'CLP');
+
                 """
         estado, datos = self.conector_bd.ejecutarSelectAll(sql)
 
@@ -47,3 +50,57 @@ class Caja_DAO:
         
         self.conector_bd.desactivarConexion()
         return estado, lista_saldos_dto
+    
+    def recuperar_clp_caja(self, codigo):
+        estado = self.conector_bd.activarConexion()
+        if estado == 66:
+            return estado, None
+
+        sql = f"""
+            SELECT s.disponibilidad
+            FROM saldo_caja s
+            JOIN moneda m ON s.cod_moneda = m.cod_moneda
+            WHERE s.cod_caja = {codigo} 
+            AND m.nom_moneda = 'CLP';
+        """
+        estado, datos = self.conector_bd.ejecutarSelectOne(sql)
+
+        if estado == 0 and datos:
+            saldo_clp = float(datos[0])
+            self.conector_bd.desactivarConexion()
+            return estado, saldo_clp
+
+        self.conector_bd.desactivarConexion()
+        return estado, 0.0
+
+
+
+    def actualizar_saldo_clp(self, cod_caja, monto):
+        estado = self.conector_bd.activarConexion()
+        if estado == 66:
+            return estado
+
+        sql = f"""
+            UPDATE saldo_caja 
+            SET disponibilidad = disponibilidad - {monto}
+            WHERE cod_caja = {cod_caja} 
+            AND cod_moneda = (SELECT cod_moneda FROM moneda WHERE nom_moneda = 'CLP')
+        """
+        estado = self.conector_bd.ejecutarUpdate(sql)
+        self.conector_bd.desactivarConexion()
+        return estado
+
+    def actualizar_saldo_moneda(self, cod_caja, cod_moneda, cantidad):
+        estado = self.conector_bd.activarConexion()
+        if estado == 66:
+            return estado
+
+        sql = f"""
+            UPDATE saldo_caja 
+            SET disponibilidad = disponibilidad + {cantidad}
+            WHERE cod_caja = {cod_caja} 
+            AND cod_moneda = {cod_moneda}
+        """
+        estado = self.conector_bd.ejecutarUpdate(sql)
+        self.conector_bd.desactivarConexion()
+        return estado

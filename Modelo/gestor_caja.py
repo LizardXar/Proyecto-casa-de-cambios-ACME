@@ -28,3 +28,8 @@ class Gestor_Caja(ModeloObservable):
         lista_dto = self.caja_dao.recuperar_saldo_caja(codigo)
         return lista_dto
 
+    def actualizar_saldo_clp(self, cod_caja, monto):
+        return self.caja_dao.actualizar_saldo_clp(cod_caja, monto)
+
+    def actualizar_saldo_moneda(self, cod_caja, cod_moneda, cantidad):
+        return self.caja_dao.actualizar_saldo_moneda(cod_caja, cod_moneda, cantidad)

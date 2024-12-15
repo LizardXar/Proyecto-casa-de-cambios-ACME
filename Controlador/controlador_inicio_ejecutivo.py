@@ -12,6 +12,7 @@ class ControladorInicioEjecutivo:
         self.frame.list_active_btn.config(command=self.listar_monedas_activas)
         self.frame.list_all_btn.config(command=self.listar_todas_monedas)
         self.frame.list_all_cajas_btn.config(command=self.listar_todas_cajas)
+        self.frame.realizar_transaccion_btn.config(command=self.realizar_transaccion)
         self.frame.signout_btn.config(command=self.cerrar_sesion)
 
     # Maneja el evento de listar monedas activas
@@ -25,6 +26,9 @@ class ControladorInicioEjecutivo:
     # Maneja el evento de listar todas las cajas
     def listar_todas_cajas(self):
         self.modelo.gestor_caja.recuperar_cajas()
+    
+    def realizar_transaccion(self):
+        self.modelo.gestor_transaccion.realizar_transaccion()
 
     # Maneja el evento de cerrar sesión
     def cerrar_sesion(self):

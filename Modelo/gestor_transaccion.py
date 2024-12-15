@@ -27,3 +27,9 @@ class Gestor_Transaccion(ModeloObservable):
     def desplegar_moneda_mas_vendida(self):
         lista_dto = self.transaccion_dao.obtener_moneda_mas_vendida()
         return lista_dto
+
+    def realizar_transaccion(self):
+        self.trigger_event("realizar_transaccion")
+
+    def registrar_transaccion(self, cod_caja, cod_moneda, monto_clp):
+        return self.transaccion_dao.registrar_transaccion(cod_caja, cod_moneda, monto_clp)
