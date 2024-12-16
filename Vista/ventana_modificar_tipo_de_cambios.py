@@ -1,8 +1,8 @@
 from tkinter import Frame, Label, Entry, Button
 
-
 class VistaTipoDeCambio(Frame):
     
+    # Inicializa la vista para modificar el tipo de cambio de una moneda
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -40,11 +40,13 @@ class VistaTipoDeCambio(Frame):
         self.return_btn = Button(self, text="Retornar")
         self.return_btn.grid(row=5, column=0, padx=10, pady=10, sticky="w")
 
+    # Muestra la información de la moneda seleccionada en el campo de la vista
     def mostrar_moneda(self, cod_moneda, nombre, tipo):
         self.moneda_entry.config(state="normal")
         self.moneda_entry.delete(0, "end")
         self.moneda_entry.insert(0, f"{cod_moneda} - {nombre} - {tipo}")
         self.moneda_entry.config(state="disabled")
 
+    # Obtiene el nuevo tipo de cambio ingresado por el usuario
     def obtener_tipo_cambio(self):
         return self.tipo_cambio_entry.get()

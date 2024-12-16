@@ -7,26 +7,25 @@ class ControladorInicioGerente:
         self.frame = self.vista.frames["inicioGerente"]
         self._bind()
     
-    # Configura los eventos de la interfaz de usuario
+    # Configura los eventos de los botones de la vista
     def _bind(self):
         self.frame.list_monedas_trazadas_btn.config(command=self.listar_monedas_trazadas)
         self.frame.list_ganancias_btn.config(command=self.listar_ganancias)
         self.frame.signout_btn.config(command=self.cerrar_sesion)
 
-    # Maneja el evento de listar las monedas trazadas
+    # Notifica al modelo para recuperar la lista de monedas trazadas
     def listar_monedas_trazadas(self):
         self.modelo.gestor_transaccion.recuperar_moneda_mas_vendida()
 
-
-    # Maneja el evento de listar las ganancias
+    # Notifica al modelo para recuperar la lista de ganancias
     def listar_ganancias(self):
         self.modelo.gestor_transaccion.recuperar_ganancias()
 
-    # Maneja el evento de cerrar sesión
+    # Maneja el evento de cerrar sesión y notifica al modelo para cerrar la sesión del usuario actual
     def cerrar_sesion(self):
         self.modelo.gestor_usuarios.cerrar_sesion()
 
-    # Actualiza la vista con el saludo al usuario actual
+    # Actualiza la vista con el saludo del usuario actual
     def update_view(self):
         current_user = self.modelo.gestor_usuarios.saludo_usuario()
         if current_user:

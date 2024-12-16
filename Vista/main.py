@@ -10,8 +10,9 @@ from .ventana_lista_ganancias import VistaListaGanancias
 from .ventana_monedas_trazadas import VistaListaMonedasTrazadas
 from .ventana_home_ejecutivo import VistaInicioEjecutivo
 from .ventana_home_cajero import VistaInicioCajero
-from .ventana_transaccion import VistaTransaccion
-from .ventana_tipo_de_cambios import VistaTipoDeCambio
+from .ventana_realizar_transaccion import VistaTransaccion
+from .ventana_modificar_tipo_de_cambios import VistaTipoDeCambio
+from .ventana_registrar_disponibilidad import VistaRegistrarDisponibilidadPesos
 
 
 class Vista:
@@ -32,6 +33,7 @@ class Vista:
         self._add_frame(VistaInicioCajero, "inicioCajero")
         self._add_frame(VistaTransaccion, "realizarTransaccion")
         self._add_frame(VistaTipoDeCambio, "modificarTipoCambio")
+        self._add_frame(VistaRegistrarDisponibilidadPesos, "registrarDisponibilidadPesos")
         
     def _add_frame(self, Frame, name):
         self.frames[name] = Frame(self.root)

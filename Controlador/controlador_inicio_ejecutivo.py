@@ -7,7 +7,7 @@ class ControladorInicioEjecutivo:
         self.frame = self.vista.frames["inicioEjecutivo"]
         self._bind()
 
-    # Configura los eventos de la interfaz de usuario
+    # Configura los eventos de los botones de la vista
     def _bind(self):
         self.frame.list_active_btn.config(command=self.listar_monedas_activas)
         self.frame.list_all_btn.config(command=self.listar_todas_monedas)
@@ -15,26 +15,27 @@ class ControladorInicioEjecutivo:
         self.frame.realizar_transaccion_btn.config(command=self.realizar_transaccion)
         self.frame.signout_btn.config(command=self.cerrar_sesion)
 
-    # Maneja el evento de listar monedas activas
+    # Notifica al modelo para recuperar la lista de monedas activas
     def listar_monedas_activas(self):
         self.modelo.gestor_monedas.recuperar_monedas_activas()
 
-    # Maneja el evento de listar todas las monedas
+    # Notifica al modelo para recuperar la lista de todas las monedas
     def listar_todas_monedas(self):
         self.modelo.gestor_monedas.recuperar_monedas()
     
-    # Maneja el evento de listar todas las cajas
+    # Notifica al modelo para recuperar la lista de todas las cajas
     def listar_todas_cajas(self):
         self.modelo.gestor_caja.recuperar_cajas()
     
+    # Notifica al modelo para realizar una transacción
     def realizar_transaccion(self):
         self.modelo.gestor_transaccion.realizar_transaccion()
 
-    # Maneja el evento de cerrar sesión
+    # Maneja el evento de cerrar sesión y notifica al modelo para cerrar la sesión del usuario actual
     def cerrar_sesion(self):
         self.modelo.gestor_usuarios.cerrar_sesion()
 
-    # Actualiza la vista con el saludo al usuario actual
+    # Actualiza la vista con el saludo del usuario actual
     def update_view(self):
         current_user = self.modelo.gestor_usuarios.saludo_usuario()
         if current_user:

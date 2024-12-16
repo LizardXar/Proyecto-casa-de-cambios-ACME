@@ -7,11 +7,11 @@ class ControladorListaActivos:
         self.frame = self.vista.frames["listaActivos"]
         self._bind()
 
-    # Configura los eventos de la interfaz de usuario
+    # Configura los eventos de los botones de la vista
     def _bind(self):
         self.frame.return_btn.config(command=self.retorno)
 
-    # Maneja el evento de retorno
+    # Cambia la vista al inicio del ejecutivo
     def retorno(self):
         self.vista.switch("inicioEjecutivo")
     
@@ -22,5 +22,5 @@ class ControladorListaActivos:
     # Actualiza la vista con la lista de activos
     def update_view(self):
         lista_dto = self.modelo.gestor_monedas.desplegar_monedas_activas()
-        print("pide listar activos")
+        print("Solicitando listar activos")
         self.frame.listar_monedas_autorizadas(lista_dto)

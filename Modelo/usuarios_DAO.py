@@ -14,16 +14,16 @@ class Usuarios_DAO:
             return estado, None
         
         sql = f"""
-                SELECT nombre, cod_tipo_empleado, cod_empleado
-                FROM empleado
-                WHERE correo = '{correo}' AND clave = '{clave}';
-            """
-        estado, datos = self.conector_bd.ejecutarSelectAll(sql)
+            SELECT nombre, cod_tipo_empleado, cod_empleado
+            FROM empleado
+            WHERE correo = '{correo}' AND clave = '{clave}';
+        """
+        estado, datos_dto = self.conector_bd.ejecutarSelectAll(sql)
 
-        if estado == 0 and datos:
-            registro = {"cod_tipo_empleado": datos[0][1], "nombre": datos[0][0], "cod_empleado": datos[0][2]}
+        if estado == 0 and datos_dto:
+            registro_dto = {"cod_tipo_empleado": datos_dto[0][1], "nombre": datos_dto[0][0], "cod_empleado": datos_dto[0][2]}
             self.conector_bd.desactivarConexion()
-            return estado, registro
+            return estado, registro_dto
 
         self.conector_bd.desactivarConexion()
         return estado, None

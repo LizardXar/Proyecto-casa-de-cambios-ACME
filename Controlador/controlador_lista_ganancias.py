@@ -7,11 +7,11 @@ class ControladorListaGanancias:
         self.frame = self.vista.frames["listaGanancias"]
         self._bind()
 
-    # Configura los eventos de la interfaz de usuario
+    # Configura los eventos de los botones de la vista
     def _bind(self):
         self.frame.return_btn.config(command=self.retorno)
 
-    # Maneja el evento de retorno
+    # Cambia la vista al inicio del gerente
     def retorno(self):
         self.vista.switch("inicioGerente")
     
@@ -22,6 +22,5 @@ class ControladorListaGanancias:
     # Actualiza la vista con la lista de ganancias
     def update_view(self):
         lista_dto = self.modelo.gestor_transaccion.desplegar_ganancias()
-        print("Listar Ganancias")
-
+        print("Solicitando listar ganancias")
         self.frame.listar_ganancias(lista_dto)

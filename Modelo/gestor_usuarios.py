@@ -4,47 +4,40 @@ from .conectorBD import ConectorBD
 
 class Gestor_Usuarios(ModeloObservable):
 
+    # Inicializa la clase con el modelo Observable y el conector a la base de datos
     def __init__(self):
-        # Llama al constructor de la clase padre ObservableModel
         super().__init__()
-        # Inicializa el conector a la base de datos
-        self.conectorBD = ConectorBD(hostdb="localhost", userdb="root", passwordb="", basedatosdb="casa_ACME")
-        # Crea una instancia de Usuarios_DAO con el conector de base de datos
+        self.conectorBD = ConectorBD()
         self.usuario_DAO = Usuarios_DAO(self.conectorBD)
-        # Variable para almacenar el usuario actual
-        self.current_user = None
-        self.current_user_id = None
+        self.current_user = None  # Variable para almacenar el nombre del usuario actual
+        self.current_user_id = None  # Variable para almacenar el ID del usuario actual
 
-    def login(self, datos_DTO):
-        # Utiliza el método buscar_user de Usuarios_DAO para buscar el usuario
-        estado, lista_DTO = self.usuario_DAO.buscar_usuario(datos_DTO)
+    # Realiza el inicio de sesión y establece el usuario actual
+    def login(self, datos_dto):
+        estado, lista_dto = self.usuario_DAO.buscar_usuario(datos_dto)
 
-        # Si la búsqueda fue exitosa y se encontró el usuario
-        if estado == 0 and lista_DTO:
-            # Asigna el nombre del usuario actual
-            self.current_user = lista_DTO["nombre"]
+        if estado == 0 and lista_dto:  # Si la búsqueda fue exitosa
+            self.current_user = lista_dto["nombre"]
+            self.current_user_id = lista_dto["cod_tipo_empleado"]
 
-            # Asigna el id del usuario actual
-            self.current_user_id = lista_DTO["cod_tipo_empleado"]
-
-            # Dependiendo del tipo de empleado, dispara un evento diferente
-            if lista_DTO["cod_tipo_empleado"] == 1:
+            if lista_dto["cod_tipo_empleado"] == 1:  # Ejecutivo
                 self.trigger_event("ingreso_ejecutivo")
 
-            elif lista_DTO["cod_tipo_empleado"] == 2:
+            elif lista_dto["cod_tipo_empleado"] == 2:  # Gerente
                 self.trigger_event("ingreso_gerente")
                 
-            elif lista_DTO["cod_tipo_empleado"] == 4:
+            elif lista_dto["cod_tipo_empleado"] == 4:  # Cajero
+                self.current_user_id = lista_dto["cod_empleado"]
                 self.trigger_event("ingreso_cajero")
 
-        # Retorna el nombre del usuario actual
+    # Retorna el nombre del usuario actual
     def saludo_usuario(self):
         return self.current_user
-
-        # Retorna el id del usuario actual
-    def cod_empleado(self):
+    
+    # Retorna el código del empleado actual
+    def retornar_cod_empleado(self):
         return self.current_user_id
     
+    # Cierra la sesión actual y dispara el evento de salida del sistema
     def cerrar_sesion(self):
-        # Dispara un evento de salida del sistema
         self.trigger_event("salida_sistema")

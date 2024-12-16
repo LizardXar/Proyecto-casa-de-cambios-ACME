@@ -19,8 +19,15 @@ class ControladorListaSaldos:
     def close(self):
         self.vista.stop_mainloop()
     
-    # Actualiza la vista con la lista de saldos
-    def update_view(self, codigo):
+    # Actualiza la vista con la lista de saldos y el saldo CLP
+    def update_view(self):
+        codigo = self.modelo.gestor_caja.obtener_caja_seleccionada()
+        
+        # Recuperar saldo en monedas extranjeras
         lista_dto = self.modelo.gestor_caja.desplegar_saldo(codigo)
-        print(f"pide listar saldos de la caja {codigo}")
+        print(f"Solicitando listar saldos de la caja {codigo}")
         self.frame.listar_saldo(lista_dto)
+
+        # Recuperar saldo en CLP
+        saldo_clp = self.modelo.gestor_caja.desplegar_saldo_clp(codigo)
+        self.frame.saldo_clp_label.config(text=f"Saldo en CLP: ${saldo_clp:.2f}")

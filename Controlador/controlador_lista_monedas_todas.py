@@ -7,15 +7,16 @@ class ControladorListaTodos:
         self.frame = self.vista.frames["listaTodos"]
         self._bind()
 
-    # Configura los eventos de la interfaz de usuario
+    # Configura los eventos de los botones de la vista
     def _bind(self):
         self.frame.return_btn.config(command=self.retorno)
         self.frame.tipo_cambio_btn.config(command=self.modificar_tipo_cambio)
 
-    # Maneja el evento de retorno
+    # Cambia la vista al inicio del ejecutivo
     def retorno(self):
         self.vista.switch("inicioEjecutivo")
     
+    # Maneja el evento de modificar el tipo de cambio de la moneda seleccionada
     def modificar_tipo_cambio(self):
         cod_moneda = self.frame.obtener_cod_moneda_seleccionado()
         if cod_moneda:
@@ -31,5 +32,5 @@ class ControladorListaTodos:
     # Actualiza la vista con la lista de todos los elementos
     def update_view(self):
         lista_dto = self.modelo.gestor_monedas.desplegar_monedas()
-        print("pide listar todos")
+        print("Solicitando listar todas las monedas")
         self.frame.listar_monedas(lista_dto)

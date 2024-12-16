@@ -10,6 +10,7 @@ from .controlador_lista_monedas_trazadas import ControladorListaMonedasTrazadas
 from .controlador_inicio_cajero import ControladorInicioCajero
 from .controlador_realizar_transaccion import ControladorRealizarTransaccion
 from .controlador_modificar_tipo_cambio import ControladorModificarTipoCambio
+from .controlador_registrar_disponibilidad import ControladorRegistrarDisponibilidadPesos
 
 class Controlador:
 
@@ -29,6 +30,7 @@ class Controlador:
         self.list_monedas_trazadas = ControladorListaMonedasTrazadas(modelo, vista)
         self.realizar_transaccion = ControladorRealizarTransaccion(modelo, vista)
         self.modificar_tipo_de_cambio = ControladorModificarTipoCambio(modelo, vista)
+        self.registrar_disponibilidad_pesos = ControladorRegistrarDisponibilidadPesos(modelo, vista)
 
         # Configura los eventos para los diferentes controladores
         self.modelo.gestor_usuarios.add_event_listener(
@@ -65,7 +67,10 @@ class Controlador:
             "realizar_transaccion", self.realizar_transaccion_listener)
         
         self.modelo.gestor_monedas.add_event_listener(
-            "modificar_tipo_cambio", self.modificar_tipo_cambio)
+            "modificar_tipo_cambio", self.modificar_tipo_cambio_listener)
+        
+        self.modelo.gestor_caja.add_event_listener(
+        "registrarDisponibilidadPesos", self.registrar_disponibilidad_listener)
     
     # Listener para el evento de ingreso como ejecutivo
     def ingreso_ejecutivo_listener(self, data):
@@ -120,9 +125,13 @@ class Controlador:
         self.realizar_transaccion.update_view()
         self.vista.switch("realizarTransaccion")
     
-    def modificar_tipo_cambio(self, data):
+    def modificar_tipo_cambio_listener(self, data):
         self.modificar_tipo_de_cambio.update_view()
         self.vista.switch("modificarTipoCambio")
+    
+    def registrar_disponibilidad_listener(self, data):
+        self.registrar_disponibilidad_pesos.update_view()
+        self.vista.switch("registrarDisponibilidadPesos")
 
 
     # Inicia la aplicación mostrando la vista de inicio de sesión

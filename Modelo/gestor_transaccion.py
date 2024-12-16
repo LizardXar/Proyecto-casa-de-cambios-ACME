@@ -7,7 +7,7 @@ class Gestor_Transaccion(ModeloObservable):
     # Inicializa la clase con el modelo Observable y el conector a la base de datos
     def __init__(self):
         super().__init__()
-        self.conector_bd = ConectorBD(hostdb="localhost", userdb="root", passwordb="", basedatosdb="casa_ACME")
+        self.conector_bd = ConectorBD()
         self.transaccion_dao = Transaccion_DAO(self.conector_bd)
     
     # Dispara el evento para recuperar la lista de ganancias
@@ -28,8 +28,10 @@ class Gestor_Transaccion(ModeloObservable):
         lista_dto = self.transaccion_dao.obtener_moneda_mas_vendida()
         return lista_dto
 
+    # Dispara el evento para realizar una transacción
     def realizar_transaccion(self):
         self.trigger_event("realizar_transaccion")
 
-    def registrar_transaccion(self, cod_caja, cod_moneda, monto_clp):
-        return self.transaccion_dao.registrar_transaccion(cod_caja, cod_moneda, monto_clp)
+    # Registra una transacción en la base de datos
+    def registrar_transaccion(self, caja_dto, moneda_dto, monto_clp_dto):
+        return self.transaccion_dao.registrar_transaccion(caja_dto, moneda_dto, monto_clp_dto)

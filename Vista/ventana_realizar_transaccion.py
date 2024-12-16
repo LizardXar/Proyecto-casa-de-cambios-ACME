@@ -3,6 +3,7 @@ from tkinter.ttk import Combobox
 
 class VistaTransaccion(Frame):
     
+    # Inicializa la vista para realizar una transacción
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -64,14 +65,16 @@ class VistaTransaccion(Frame):
         self.transact_btn = Button(self, text="Realizar Transacción")
         self.transact_btn.grid(row=5, column=1, columnspan=2, padx=0, pady=10, sticky="ew")
 
-        self.return_btn = Button(self, text="Retornar menu")
+        # Botón para retornar al menú principal
+        self.return_btn = Button(self, text="Retornar menú")
         self.return_btn.grid(row=6, column=0, padx=10, pady=10, sticky="w")
 
+    # Obtiene los datos de la transacción ingresados por el usuario
     def data_transaction(self):
         caja = self.caja_var.get()
         currency = self.currency_var.get()
         amount = self.amount_input.get()
         data_dto = {"caja": caja, "moneda": currency, "cantidad": amount}
         
-        self.amount_input.delete(0, last=len(amount))
+        self.amount_input.delete(0, last=len(amount))  # Limpia el campo de entrada de cantidad
         return data_dto

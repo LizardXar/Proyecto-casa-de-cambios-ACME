@@ -3,18 +3,18 @@ from tkinter import ttk
 
 class VistaListaMonedasTrazadas(Frame):
 
-
+    # Inicializa la vista para mostrar la lista de monedas más trazadas
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
+        # Encabezado de la vista
         self.header = Label(self, text="Lista de Monedas Más Trazadas")
         self.header.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
-
-        # Reemplazar Listbox con Treeview
+        # Configuración del Treeview para mostrar la lista de monedas
         self.treeview = ttk.Treeview(self, columns=("Moneda", "Trazada"), show="headings")
         self.treeview.grid(row=1, column=0, padx=(0, 30), sticky="e")
 
@@ -30,6 +30,7 @@ class VistaListaMonedasTrazadas(Frame):
         self.return_btn = Button(self, text="Retornar menú")
         self.return_btn.grid(row=2, column=0, padx=10, pady=10, sticky="w")
 
+    # Lista las monedas más trazadas en el Treeview
     def listar_monedas(self, lista_monedas):
         # Limpiar entradas anteriores en el treeview
         for row in self.treeview.get_children():

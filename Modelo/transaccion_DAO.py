@@ -19,19 +19,19 @@ class Transaccion_DAO:
             JOIN moneda m ON t.cod_moneda = m.cod_moneda
             GROUP BY m.nom_moneda
             ORDER BY ganancia_total DESC;
-            """
-        estado, datos = self.conector_bd.ejecutarSelectAll(sql)
+        """
+        estado, datos_dto = self.conector_bd.ejecutarSelectAll(sql)
         
         lista_ganancias_dto = {}
         
         if estado == 0:
-            for i in range(len(datos)):
-                registro = {"moneda": datos[i][0], "ganancia": datos[i][1], "monto": datos[i][2]}
-                lista_ganancias_dto[i] = registro
+            for i in range(len(datos_dto)):
+                registro_dto = {"moneda": datos_dto[i][0], "ganancia": datos_dto[i][1], "monto": datos_dto[i][2]}
+                lista_ganancias_dto[i] = registro_dto
 
         self.conector_bd.desactivarConexion()
         return estado, lista_ganancias_dto
-    
+
     # Obtiene la moneda más vendida
     def obtener_moneda_mas_vendida(self):
         estado = self.conector_bd.activarConexion()
@@ -44,21 +44,21 @@ class Transaccion_DAO:
             JOIN moneda m ON t.cod_moneda = m.cod_moneda
             GROUP BY m.nom_moneda
             ORDER BY cantidad_transacciones DESC;
-            """
+        """
         
-        estado, datos = self.conector_bd.ejecutarSelectAll(sql)
+        estado, datos_dto = self.conector_bd.ejecutarSelectAll(sql)
 
         lista_monedas_vendidas_dto = {}
 
-
         if estado == 0:
-            for i in range(len(datos)):
-                registro = {"moneda": datos[i][0], "trazada": datos[i][1]}
-                lista_monedas_vendidas_dto[i] = registro
+            for i in range(len(datos_dto)):
+                registro_dto = {"moneda": datos_dto[i][0], "trazada": datos_dto[i][1]}
+                lista_monedas_vendidas_dto[i] = registro_dto
 
         self.conector_bd.desactivarConexion()
         return estado, lista_monedas_vendidas_dto
-    
+
+    # Registra una nueva transacción en la base de datos
     def registrar_transaccion(self, cod_caja, cod_moneda, monto_clp):
         estado = self.conector_bd.activarConexion()
         if estado == 66:
