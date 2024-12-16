@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-12-2024 a las 16:41:22
+-- Tiempo de generación: 16-12-2024 a las 03:08:24
 -- Versión del servidor: 8.3.0
 -- Versión de PHP: 8.2.18
 
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `moneda` (
   `tipo_cambio` decimal(10,2) DEFAULT NULL,
   `estado` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`cod_moneda`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `moneda`
@@ -99,15 +99,16 @@ CREATE TABLE IF NOT EXISTS `moneda` (
 
 INSERT INTO `moneda` (`cod_moneda`, `nom_moneda`, `tipo_cambio`, `estado`) VALUES
 (1, 'USD', 870.00, '1'),
-(2, 'EUR', 950.00, '1'),
-(3, 'GBP', 1100.00, '1'),
-(4, 'JPY', 8.00, '2'),
+(2, 'EUR', 940.00, '1'),
+(3, 'GBP', 900.00, '1'),
+(4, 'JPY', 400.00, '1'),
 (5, 'AUD', 650.00, '1'),
 (6, 'CAD', 660.00, '1'),
 (7, 'CHF', 940.00, '2'),
 (8, 'CNY', 130.00, '1'),
-(9, 'MXN', 45.00, '2'),
-(10, 'BRL', 170.00, '2');
+(9, 'MXN', 200.00, '2'),
+(10, 'BRL', 90.00, '2'),
+(11, 'CLP', 1.00, '2');
 
 -- --------------------------------------------------------
 
@@ -130,12 +131,14 @@ CREATE TABLE IF NOT EXISTS `saldo_caja` (
 --
 
 INSERT INTO `saldo_caja` (`cod_caja`, `cod_moneda`, `disponibilidad`) VALUES
-(1, 1, 200.00),
-(1, 2, 200.00),
+(1, 1, 9658.10),
+(1, 2, 204.00),
 (1, 5, 250.00),
 (1, 10, 400.00),
-(2, 1, 100.00),
-(2, 3, 550.00);
+(1, 11, 300.00),
+(2, 1, 509.00),
+(2, 3, 550.00),
+(2, 11, 9000.00);
 
 -- --------------------------------------------------------
 
@@ -176,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `transaccion` (
   PRIMARY KEY (`cod_transaccion`),
   KEY `fk_transaccion_caja1_idx` (`cod_caja`),
   KEY `fk_transaccion_moneda1_idx` (`cod_moneda`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `transaccion`
@@ -186,7 +189,32 @@ INSERT INTO `transaccion` (`cod_transaccion`, `cod_caja`, `cod_moneda`, `monto_t
 (1, 1, 1, 20.00, '2024-12-11 13:01:55'),
 (2, 1, 5, 30.00, '2024-12-12 13:01:55'),
 (3, 1, 1, 30.00, '2024-12-12 13:25:34'),
-(4, 1, 1, 50.00, '2024-12-31 13:02:34');
+(4, 1, 1, 50.00, '2024-12-31 13:02:34'),
+(5, 1, 1, 400.00, '2024-12-14 20:30:48'),
+(6, 1, 1, 20.00, '2024-12-14 20:56:25'),
+(7, 1, 2, 200.00, '2024-12-14 21:01:52'),
+(8, 1, 2, 20000.00, '2024-12-14 21:02:01'),
+(9, 1, 1, 200.00, '2024-12-14 21:08:12'),
+(10, 1, 1, 1.00, '2024-12-14 21:12:39'),
+(11, 1, 1, 10.00, '2024-12-14 21:12:52'),
+(12, 1, 1, 100.00, '2024-12-14 21:13:11'),
+(13, 1, 1, 40000.00, '2024-12-14 21:13:41'),
+(14, 2, 2, 2.00, '2024-12-14 22:03:49'),
+(15, 1, 6, 10.00, '2024-12-14 22:12:01'),
+(16, 1, 1, 100.00, '2024-12-14 22:14:09'),
+(17, 2, 4, 100.00, '2024-12-14 22:35:07'),
+(18, 1, 1, 200.00, '2024-12-15 17:11:00'),
+(19, 1, 1, 9000.00, '2024-12-15 17:11:08'),
+(20, 1, 1, 0.00, '2024-12-15 17:11:13'),
+(21, 1, 1, 2.01, '2024-12-15 18:04:00'),
+(22, 1, 1, 99.99, '2024-12-15 18:06:19'),
+(23, 2, 4, 40.00, '2024-12-15 22:36:31'),
+(24, 2, 4, 2.00, '2024-12-15 22:36:43'),
+(25, 2, 1, 400.00, '2024-12-15 22:38:57'),
+(26, 2, 1, 9.00, '2024-12-15 22:39:00'),
+(27, 1, 2, 4.00, '2024-12-15 22:40:47'),
+(28, 1, 4, 4.00, '2024-12-15 23:05:21'),
+(29, 1, 1, 10.00, '2024-12-15 23:44:47');
 
 --
 -- Restricciones para tablas volcadas
