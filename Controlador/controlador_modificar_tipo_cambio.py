@@ -42,7 +42,7 @@ class ControladorModificarTipoCambio:
 
         # Validación usando expresiones regulares para 1 o más dígitos, con hasta 2 decimales
         if not re.match(r"^\d+(\.\d{1,2})?$", nuevo_tipo_cambio):
-            self.frame.error_label.config(fg="red", text="El tipo de cambio debe tener hasta 2 decimales.")
+            self.frame.error_label.config(fg="red", text="El tipo de cambio debe ser un numero entero con hasta 2 decimales.")
             return
 
         try:
